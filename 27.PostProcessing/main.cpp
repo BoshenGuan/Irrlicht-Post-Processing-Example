@@ -111,10 +111,6 @@ public:
         // turn off lighting as default
         Material.setFlag(video::EMF_LIGHTING, false);
 
-        // turn off mip maps because we want to directly 
-        // manipulate texture pixels
-        Material.setFlag(video::EMF_USE_MIP_MAPS, false);
-
         // set texture warp settings to clamp to edge pixel
         for (u32 i = 0; i < video::MATERIAL_MAX_TEXTURES; i++)
         {
@@ -308,7 +304,8 @@ int main()
     // we create a screen quad
     ScreenQuad *screenQuad = new ScreenQuad(driver);
 
-    // turn off bilinear filter since we do not want interpolated result
+    // turn off mip maps and bilinear filter since we do not want interpolated result
+    screenQuad->setMaterialFlag(video::EMF_USE_MIP_MAPS, false);
     screenQuad->setMaterialFlag(video::EMF_BILINEAR_FILTER, false);
 
     // set quad texture to RTT we just create
